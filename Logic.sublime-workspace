@@ -1,0 +1,371 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"new",
+				"new_mat"
+			],
+			[
+				"rand",
+				"randint"
+			],
+			[
+				"rad",
+				"randint"
+			],
+			[
+				"ra",
+				"randint"
+			],
+			[
+				"count",
+				"count"
+			],
+			[
+				"flatma",
+				"flatMap"
+			],
+			[
+				"mapValues",
+				"mapValues"
+			],
+			[
+				"flat",
+				"flatMapValues"
+			],
+			[
+				"raw",
+				"raw6"
+			],
+			[
+				"broadcas",
+				"broadcastvar"
+			],
+			[
+				"map",
+				"mapValues"
+			],
+			[
+				"json",
+				"json"
+			],
+			[
+				"wine",
+				"winequality-red"
+			],
+			[
+				"m",
+				"m"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "import random\n\n#initialising matrix at the beggining, empty positions initialised with a 0.\ndef start_game():\n\tmat = []\n\tfor i in range(4):\n\t\tmat.append([0]*4)\n\n#get a 2 at random index for empty position \ndef add_new_2(mat):\n\tr = random.randint(0,3) #getting a random row index\n\tc = random.randint(0,3) #getting a random column index\n\n\n\t#keep generating a random row/column index until we find an empty position with 0\n\n\twhile(mat[r][c] != 0):\n\t\tr = random.randint(0,3)\n\t\tc = random.randint(0,3)\n\t#place a 2 when a random empty row/column index is found\n\n\tmat[r][c] = 2\n\n\n#function for reversing the matrix\ndef reverse(mat):\n\tnew_mat = []\n\tfor i in range(4):\n\t\tnew_mat.append([]) #append empty list everytime we go to next row\n\t\tfor j in range(4):\n\t\t\tnew_mat[i].append(mat[i][4-j-1]) #when reversed, element at j=0 is at j=3(which is 4-0-1).\n\t\t\t\t\t\t\t\t\t\t\t #Similarily for all indices,same logic used.\n\n\treturn new_mat \n\n#function to implement transpose\ndef transpose(mat):\n\tnew_mat = []\n\tfor i in range(4):\n\t\tnew_mat.append([])\n\t\tfor j in range(4):\n\t\t\tnew_mat[i].append(mat[j][i]) #After transpose, element at (i,j) comes at (j,i)\n\treturn new_mat\n\n\n#function to merge the consecutive same values and multiply them by two and update.\n#Update the cell with an empty value once merging is done with adjacent cell.\n\ndef merge(mat): \n\n\t#traversing through rows and columns to check for equal elements\n\tfor i in range(4):\n\t\t#take range(3) for column to avoind out of bound error\n\t\tfor j in range(3):\n\n\t\t\tif mat[i][j] == mat[i][j+1] and mat[i][j] != 0:\n\t\t\t\t#combining and multiplying by 2\n\t\t\t\tmat[i][j] = mat[i][j]*2\n\t\t\t\t#replacing the empty cell with 0\n\t\t\t\tmat[i][j+1] = 0\n\n\n#function to replace 0's with non zero values and move them to one side\ndef compress(mat):\n\t#first making an empty matrix where changes will be reflected after compression\n\tnew_mat = []\n\tfor i in range(4):\n\t\tnew_mat.append([0]*4)\n\n\tfor i in range(4):\n\t\t#everytime we change the row, the pos index is changed to 0\n\t\tpos = 0\n\n\t\tfor j in range(4):\n\t\t\t#In the new matrix, update the position only of non zero elements.\n\n\t\t\t#No changes for values that are 0 which compresses the matrix and keeps-\n\t\t\t#-non zero values at one side and 0 values at one side\n\n\n\t\t\tif mat[i][j] != 0:\n\t\t\t\tnew_mat[i][pos] = mat[i][j]\n\t\t\t\tpos += 1\n\n\treturn new_mat\n\n\n\ndef get_current_state(mat):\n\t#Anywhere 2048 is present\n\n\tfor i in range(4):\n\t\tfor j in range(4):\n\t\t\tif(mat[i][j] == 2048):\n\t\t\t\treturn 'WON'\n\n\t#The next set of loops determine each case where a game still won't be over.\n\n\t\n\t#CASE 1 : Anywhere 0 is present then game is still not over\n\n\tfor i in range(4):\n\t\tfor j in range(4):\n\t\t\tif (mat[i][j] == 0):\n\t\t\t\treturn 'GAME NOT OVER'\n\n\t#CASE 2 : Consecutive elements with same value, because they can combine and create a new empty space.\n\t#Every Row and Column except last row and last column to avoid out of bounds error.\n\n\n\tfor i in range(3):\n\t\tfor j in range(3):\n\t\t\tif(mat[i][j] == mat[i+1][j] or mat[i][j] == mat[i][j+1]):\n\t\t\t\treturn 'GAME NOT OVER'\n\n\n\t#Checking state for Last Row\n\tfor j in range(3):\n\t\tif(mat[i][j] == mat[i+1][j] or mat[i][j] == mat[i][j+1]):\n\t\t\treturn 'GAME NOT OVER'\n\n\n\t#Checking state for Last Column\n\tfor i in range(3):\n\t\tif mat[i][3] == mat[3][j+1]:\n\t\t\treturn 'GAME NOT OVER'\n\n\treturn 'LOST'  # If none of the above, then the game is lost\n\n",
+			"file": "Logic.py",
+			"file_size": 19,
+			"file_write_time": 132466513402232346,
+			"settings":
+			{
+				"buffer_size": 3318,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Add Channel"
+			],
+			[
+				"",
+				"Set Syntax: Python"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/ankushvasishta/Downloads/0000000000002890/2048.py",
+		"/Users/ankushvasishta/Downloads/0000000000002890/LogicsFinal.py",
+		"/Users/ankushvasishta/Downloads/0000000000002890/constants.py",
+		"/Users/ankushvasishta/Downloads/Big-Data-Project-master/clean_data/StubReducer.java",
+		"/Users/ankushvasishta/Downloads/Big-Data-Project-master/clean_data/Pincode_to_Area.java",
+		"/Users/ankushvasishta/Downloads/Big-Data-Project-master/a5/StubDriver.java",
+		"/Users/ankushvasishta/Downloads/Big-Data-Project-master/a1/StubReducer.java",
+		"/Users/ankushvasishta/Downloads/Big-Data-Project-master/a1/StubMapper.java",
+		"/Users/ankushvasishta/Downloads/Big-Data-Project-master/a1/StubDriver.java",
+		"/Users/ankushvasishta/Documents/DATA SCIENCE/HelloSpark/Text Mining/main.py",
+		"/Users/ankushvasishta/Documents/DATA SCIENCE/HelloSpark/data/P0.py",
+		"/Users/ankushvasishta/Downloads/nn_noise_mnist_cpu-graph.py",
+		"/Users/ankushvasishta/Downloads/nn_noise_mnist_cpu-graph.ipy",
+		"/Users/ankushvasishta/Documents/ssdfa-master/lib/FeedbackFC.py",
+		"/Users/ankushvasishta/Documents/ssdfa-master/mnist_fc.py",
+		"/Users/ankushvasishta/Downloads/README.md",
+		"/Users/ankushvasishta/Documents/DATA SCIENCE/DSIIFinal/ds_submission/viz.py",
+		"/Users/ankushvasishta/Documents/DATA SCIENCE/DSIIFinal/ds_submission/main.py",
+		"/Users/ankushvasishta/Desktop/fun.py",
+		"/Users/ankushvasishta/Downloads/JavaPlay/app/Module.java",
+		"/Final",
+		"/package DB.Final;",
+		"/Users/ankushvasishta/Downloads/src/AppSlash/Code/Table.java",
+		"/Users/ankushvasishta/Downloads/src/AppSlash/Code/Tester.java",
+		"/Users/ankushvasishta/Documents/DS/HelloSpark/data/P0.py",
+		"/Users/ankushvasishta/Documents/DS/DSIIFinal/ds_submission/main.py",
+		"/Users/ankushvasishta/Desktop/findmax.py",
+		"/Users/ankushvasishta/Downloads/data/sp4.json",
+		"/Users/ankushvasishta/Downloads/P0.py",
+		"/Users/ankushvasishta/Downloads/MLCourse/SparkDecisionTree.py",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/Exercise9.5.3(7).scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/SimplerRegressionexer1-3.scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/Exercise9.5.3(7).scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/nn(3:26).scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/navy.scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/SimplerRegressionwine.scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/SimplerRegression(WineQuality).scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/SimplerRegression(ForestFIres).scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/SimplerRegression(Forestfires).scala",
+		"/Users/ankushvasishta/Downloads/SimplerRegressionexer1.scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/src/main/scala/Main.scala",
+		"/Users/ankushvasishta/Documents/DS-2/hello-world-template/build.sbt",
+		"/Applications/ITOS"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Logic.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1310,
+								1310
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 508.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 108.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "Logic.py",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Desktop/Logic.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
